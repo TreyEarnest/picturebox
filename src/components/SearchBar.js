@@ -1,10 +1,13 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-  // callback method handler
-  onInputChange(event) {
-    console.log(event.target.value);
+  // initialing the state term
+  state = { term: "" };
+
+  onFormSubmit(event) {
+    event.preventDefault();
   }
+
   render() {
     return (
       <div className="ui raised segment">
@@ -15,8 +18,12 @@ class SearchBar extends React.Component {
               <input
                 type="text"
                 placeholder="Search..."
-                // onChange prop that calls the onInputChange callback function
-                onChange={this.onInputChange}
+                // Controlled component
+                // this is done so that react drives the data and not HTML
+                // updating the state with the string typed into the input field
+                onChange={e => this.setState({ term: e.target.value })}
+                // value if the text entered into the input field
+                value={this.state.term}
               />
               <i className="inverted circular search link icon" />
             </div>
